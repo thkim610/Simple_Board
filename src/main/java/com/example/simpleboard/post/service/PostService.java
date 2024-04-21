@@ -3,6 +3,7 @@ package com.example.simpleboard.post.service;
 import com.example.simpleboard.post.db.PostEntity;
 import com.example.simpleboard.post.db.PostRepository;
 import com.example.simpleboard.post.model.PostRequest;
+import com.example.simpleboard.post.model.PostViewRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -30,5 +31,32 @@ public class PostService {
                 .build();
 
         return postRepository.save(entity);
+    }
+
+    /**
+     * 1. 게시글이 있는지 체크
+     * 2. 비밀번호가 있는지 체크
+     * @param postViewRequest
+     * @return PostEntity
+     */
+    public PostEntity view(PostViewRequest postViewRequest) {
+        //1. 게시글이 있는지 체크
+        return postRepository.findById(postViewRequest.getPostId())
+                .map( it -> { //해당 데이터가 있는지 체크.
+                    //entity가 존재할 때
+                    if(!it.getPassword().equals(postViewRequest.getPassword())){
+                        //패스워드가 맞지 않을 때
+                        String format = "패스워드가 맞지 않습니다. %s vs %s";
+
+                        throw new RuntimeException(String.format(format, it.getPassword(), postViewRequest.getPassword()));
+                    }
+
+                    return it;
+
+                }).orElseThrow( // 게시글 자체가 존재하지 않을 떄
+                        () -> {
+                            return new RuntimeException("해당 게시글이 존재하지 않습니다. : " + postViewRequest.getPostId());
+                        }
+                );
     }
 }
