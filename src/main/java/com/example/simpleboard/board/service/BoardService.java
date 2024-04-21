@@ -12,8 +12,10 @@ public class BoardService {
 
     private final BoardRepository boardRepository;
 
+    //게시판 생성
     public BoardEntity create(BoardRequest boardRequest){
 
+        //빌더 패턴으로 객체 생성.
         BoardEntity entity = BoardEntity.builder()
                 .boardName(boardRequest.getBoardName())
                 .status("REGISTERED")

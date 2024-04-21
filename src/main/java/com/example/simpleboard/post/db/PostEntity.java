@@ -18,6 +18,7 @@ public class PostEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Long boardId;
     private String userName;
     private String password;
     private String email;

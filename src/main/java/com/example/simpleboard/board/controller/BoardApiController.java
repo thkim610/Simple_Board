@@ -5,10 +5,7 @@ import com.example.simpleboard.board.db.BoardRepository;
 import com.example.simpleboard.board.model.BoardRequest;
 import com.example.simpleboard.board.service.BoardService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -19,8 +16,9 @@ public class BoardApiController {
 
     private final BoardService boardService;
 
+    //게시판 생성
     @PostMapping("")
-    public BoardEntity create(@Valid BoardRequest boardRequest){
+    public BoardEntity create(@Valid @RequestBody BoardRequest boardRequest){
         return boardService.create(boardRequest);
     }
 

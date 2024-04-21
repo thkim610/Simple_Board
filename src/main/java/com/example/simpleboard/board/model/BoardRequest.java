@@ -12,7 +12,7 @@ import javax.validation.constraints.NotBlank;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)
+@JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class) //Json key 인자를 스네이크 표기법으로 작성.
 public class BoardRequest {
 
     @NotBlank //Not null도 같이 포함됨.
