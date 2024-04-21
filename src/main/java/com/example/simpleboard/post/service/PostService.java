@@ -4,6 +4,8 @@ import com.example.simpleboard.post.db.PostEntity;
 import com.example.simpleboard.post.db.PostRepository;
 import com.example.simpleboard.post.model.PostRequest;
 import com.example.simpleboard.post.model.PostViewRequest;
+import com.example.simpleboard.reply.db.ReplyEntity;
+import com.example.simpleboard.reply.service.ReplyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,7 @@ import java.util.List;
 public class PostService {
 
     private final PostRepository postRepository;
+    private final ReplyService replyService;
 
     //게시글 작성
     public PostEntity create(PostRequest postRequest){
@@ -52,6 +55,10 @@ public class PostService {
 
                         throw new RuntimeException(String.format(format, it.getPassword(), postViewRequest.getPassword()));
                     }
+
+                    //답변 글도 같이 적용. (출력 시, 답변 글도 보여줌.)
+                    List<ReplyEntity> replyList = replyService.findByPostId(it.getId());
+                    it.setReplyList(replyList);
 
                     return it;
 
