@@ -23,7 +23,8 @@ public class PostApiController {
         return postService.create(postRequest);
     }
 
-    //게시글 조회 (익명 게시판이기 때문에 비밀번호를 통해 게시글을 볼 수 있음.)
+    //게시글 조회
+    //(익명 게시판이기 때문에 비밀번호를 통해 게시글을 볼 수 있음.)
     @PostMapping("/view")
     public PostEntity view(@Valid @RequestBody PostViewRequest postViewRequest){
         return postService.view(postViewRequest);
@@ -36,7 +37,9 @@ public class PostApiController {
     }
 
     //게시글 삭제
-    public void delete(){
-
+    // 비밀번호를 받아 일치해야 삭제가 가능.
+    @PostMapping("/delete")
+    public void delete(@Valid @RequestBody PostViewRequest postViewRequest){
+        postService.delete(postViewRequest);
     }
 }
