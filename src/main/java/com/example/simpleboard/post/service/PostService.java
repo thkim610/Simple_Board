@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -58,5 +59,10 @@ public class PostService {
                             return new RuntimeException("해당 게시글이 존재하지 않습니다. : " + postViewRequest.getPostId());
                         }
                 );
+    }
+
+    //게시글 목록 조회
+    public List<PostEntity> all() {
+        return postRepository.findAll();
     }
 }

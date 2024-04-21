@@ -30,8 +30,9 @@ public class PostApiController {
     }
 
     //게시글 목록 조회
+    @GetMapping("/all")
     public List<PostEntity> list(){
-
+        return postService.all();
     }
 
     //게시글 삭제
