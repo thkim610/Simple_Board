@@ -4,6 +4,7 @@ import com.example.simpleboard.board.db.BoardEntity;
 import com.example.simpleboard.reply.db.ReplyEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -42,5 +43,7 @@ public class PostEntity {
     //reply 엔티티와 1:n 연관관계 설정
     @OneToMany(mappedBy = "post")
     @Builder.Default
+    @Where(clause = "status = 'REGISTERED'") //status가 REGISTERED인 댓글만
+    @org.hibernate.annotations.OrderBy(clause = "id desc") //최근 달린 댓글 순으로 보여줌. (id가 큰것부터)
     private List<ReplyEntity> replyList = new ArrayList<>(); //답변이 비어있는 것을 기본값으로 설정.
 }
