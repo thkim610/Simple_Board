@@ -20,7 +20,6 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final BoardRepository boardRepository;
-    private final ReplyService replyService;
 
     //게시글 작성
     public PostEntity create(PostRequest postRequest){
@@ -62,9 +61,10 @@ public class PostService {
                         throw new RuntimeException(String.format(format, it.getPassword(), postViewRequest.getPassword()));
                     }
 
-                    //답변 글도 같이 적용. (출력 시, 답변 글도 보여줌.)
-                    List<ReplyEntity> replyList = replyService.findByPostId(it.getId());
-                    it.setReplyList(replyList);
+                    // => 연관관계를 @OneToMany, @ManyToOne으로 설정하였기 때문에 없어도 동일하게 적용됨.
+//                    //답변 글도 같이 적용. (출력 시, 답변 글도 보여줌.)
+//                    List<ReplyEntity> replyList = replyService.findByPostId(it.getId());
+//                    it.setReplyList(replyList);
 
                     return it;
 
@@ -77,7 +77,7 @@ public class PostService {
 
     //게시글 목록 조회
     public List<PostEntity> all() {
-        return postRepository.findAllByStatusOrderByIdDesc("REGISTERED");
+        return postRepository.findAll();
     }
 
     /**

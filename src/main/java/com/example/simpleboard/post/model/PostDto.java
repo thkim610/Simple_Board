@@ -33,6 +33,4 @@ public class PostDto {
     //board 엔티티와 n:1 연관관계 설정
     private Long boardId;
 
-    //답변 글 목록
-    private List<ReplyEntity> replyList = List.of(); //답변이 비어있는 것을 기본값으로 설정.
 }

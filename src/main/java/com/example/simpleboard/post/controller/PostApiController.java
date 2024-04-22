@@ -27,7 +27,14 @@ public class PostApiController {
     //(익명 게시판이기 때문에 비밀번호를 통해 게시글을 볼 수 있음.)
     @PostMapping("/view")
     public PostEntity view(@Valid @RequestBody PostViewRequest postViewRequest){
-        return postService.view(postViewRequest);
+
+        PostEntity entity = postService.view(postViewRequest);
+
+        entity.getReplyList().forEach(
+                it -> {}
+        );
+
+        return entity;
     }
 
     //게시글 목록 조회
