@@ -25,6 +25,9 @@ import javax.validation.constraints.Size;
 @JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class) //스네이크 케이스로 받음.
 public class PostRequest {
 
+    //어떠한 게시판에 글을 작성할지 설정.
+    private Long boardId = 1L;
+
     @NotBlank
     private String userName;
 

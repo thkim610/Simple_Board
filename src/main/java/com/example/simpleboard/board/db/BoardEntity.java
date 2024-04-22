@@ -1,11 +1,10 @@
 package com.example.simpleboard.board.db;
 
+import com.example.simpleboard.post.db.PostEntity;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -21,4 +20,8 @@ public class BoardEntity {
     private Long id;
     private String boardName;
     private String status;
+
+    //post 엔티티와 1:n 연관관계 설정
+    @OneToMany(mappedBy = "board")
+    private List<PostEntity> postlist = List.of();
 }

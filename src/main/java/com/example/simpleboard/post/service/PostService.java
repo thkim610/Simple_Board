@@ -1,5 +1,7 @@
 package com.example.simpleboard.post.service;
 
+import com.example.simpleboard.board.db.BoardEntity;
+import com.example.simpleboard.board.db.BoardRepository;
 import com.example.simpleboard.post.db.PostEntity;
 import com.example.simpleboard.post.db.PostRepository;
 import com.example.simpleboard.post.model.PostRequest;
@@ -17,14 +19,18 @@ import java.util.List;
 public class PostService {
 
     private final PostRepository postRepository;
+    private final BoardRepository boardRepository;
     private final ReplyService replyService;
 
     //게시글 작성
     public PostEntity create(PostRequest postRequest){
 
+        //게시판이 존재하는 여부 체크 필요.
+        BoardEntity boardEntity = boardRepository.findById(postRequest.getBoardId()).get(); // << 임시고정
+
         //빌더 패턴으로 객체 생성.
         PostEntity entity = PostEntity.builder()
-                .boardId(1L) // << 임시 고정
+                .board(boardEntity)
                 .userName(postRequest.getUserName())
                 .password(postRequest.getPassword())
                 .email(postRequest.getEmail())
