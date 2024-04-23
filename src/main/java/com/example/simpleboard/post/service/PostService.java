@@ -2,13 +2,15 @@ package com.example.simpleboard.post.service;
 
 import com.example.simpleboard.board.db.BoardEntity;
 import com.example.simpleboard.board.db.BoardRepository;
+import com.example.simpleboard.common.Api;
+import com.example.simpleboard.common.Pagination;
 import com.example.simpleboard.post.db.PostEntity;
 import com.example.simpleboard.post.db.PostRepository;
 import com.example.simpleboard.post.model.PostRequest;
 import com.example.simpleboard.post.model.PostViewRequest;
-import com.example.simpleboard.reply.db.ReplyEntity;
-import com.example.simpleboard.reply.service.ReplyService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -76,8 +78,24 @@ public class PostService {
     }
 
     //게시글 목록 조회
-    public List<PostEntity> all() {
-        return postRepository.findAll();
+    public Api<List<PostEntity>> all(Pageable pageable) {
+
+        Page<PostEntity> list = postRepository.findAll(pageable);//페이지 정보를 넣게 되면 해당 페이지만큼 정보를 보여줌.
+
+        Pagination pagination = Pagination.builder()
+                .page(list.getNumber()) //현재 페이지
+                .size(list.getSize()) // 사이즈
+                .currentElements(list.getNumberOfElements()) //현재 페이지의 요소 개수
+                .totalPage(list.getTotalPages()) //전체 페이지 수
+                .totalElements(list.getTotalElements()) //전체 요소의 개수
+                .build();
+
+        Api<List<PostEntity>> response = Api.<List<PostEntity>>builder()
+                .body(list.toList())
+                .pagination(pagination)
+                .build();
+
+        return response;
     }
 
     /**
