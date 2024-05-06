@@ -4,13 +4,16 @@ import com.example.simpleboard.board.db.BoardEntity;
 import com.example.simpleboard.board.db.BoardRepository;
 import com.example.simpleboard.board.model.BoardDto;
 import com.example.simpleboard.board.model.BoardRequest;
+import com.example.simpleboard.crud.CRUDAbstractService;
+import com.example.simpleboard.crud.CRUDInterface;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class BoardService {
+public class BoardService extends CRUDAbstractService<BoardDto, BoardEntity> {
 
+/*
     private final BoardRepository boardRepository;
     private final BoardConverter boardConverter;
 
@@ -36,4 +39,5 @@ public class BoardService {
 
         return boardConverter.toDto(boardEntity); //엔터티를 dto로 변환하여 반환.
     }
+*/
 }

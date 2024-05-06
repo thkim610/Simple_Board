@@ -5,6 +5,7 @@ import com.example.simpleboard.board.db.BoardRepository;
 import com.example.simpleboard.board.model.BoardDto;
 import com.example.simpleboard.board.model.BoardRequest;
 import com.example.simpleboard.board.service.BoardService;
+import com.example.simpleboard.crud.CRUDAbstractApiController;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -15,8 +16,8 @@ import javax.validation.Valid;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/board")
-public class BoardApiController {
-
+public class BoardApiController extends CRUDAbstractApiController<BoardDto, BoardEntity> {
+/*
     private final BoardService boardService;
 
     //게시판 생성
@@ -32,6 +33,6 @@ public class BoardApiController {
 
         log.info("result : {}", entity);
         return entity;
-    }
+    }*/
 
 }
