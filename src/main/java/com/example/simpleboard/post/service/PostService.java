@@ -4,8 +4,10 @@ import com.example.simpleboard.board.db.BoardEntity;
 import com.example.simpleboard.board.db.BoardRepository;
 import com.example.simpleboard.common.Api;
 import com.example.simpleboard.common.Pagination;
+import com.example.simpleboard.crud.CRUDAbstractService;
 import com.example.simpleboard.post.db.PostEntity;
 import com.example.simpleboard.post.db.PostRepository;
+import com.example.simpleboard.post.model.PostDto;
 import com.example.simpleboard.post.model.PostRequest;
 import com.example.simpleboard.post.model.PostViewRequest;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +20,8 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class PostService {
+public class PostService extends CRUDAbstractService<PostDto, PostEntity> {
+/*
 
     private final PostRepository postRepository;
     private final BoardRepository boardRepository;
@@ -44,13 +47,15 @@ public class PostService {
         return postRepository.save(entity);
     }
 
-    /**
+    */
+/**
      * 게시글 조회 시,
      * 1. 게시글이 있는지 체크
      * 2. 비밀번호가 있는지 체크
      * @param postViewRequest
      * @return PostEntity
-     */
+     *//*
+
     public PostEntity view(PostViewRequest postViewRequest) {
         //1. 게시글이 있는지 체크 (ID가 있고, 상태가 REGISTERED인 게시글
         return postRepository.findFirstByIdAndStatusOrderByIdDesc(postViewRequest.getPostId(), "REGISTERED")
@@ -98,12 +103,14 @@ public class PostService {
         return response;
     }
 
-    /**
+    */
+/**
      * 게시글 삭제 시,
      * 1. 게시글이 있는지 체크
      * 2. 비밀번호가 있는지 체크
      * @param postViewRequest
-     */
+     *//*
+
     //게시글 삭제
     public void delete(PostViewRequest postViewRequest) {
         //1. 게시글이 있는지 체크
@@ -128,4 +135,5 @@ public class PostService {
                         }
                 );
     }
+*/
 }
